@@ -1,7 +1,7 @@
 # Markdown Hub
 
 ## Files
-- [Adidas Nadeshot Rivalry](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Adidas%20Nadeshot%20Rivalry.md)
+- [Adidas Nadeshot Rivalry](Wishlist%20Items/Adidas%20Nadeshot%20Rivalry.md)
 - [Allbirds Tree Loungers](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Allbirds%20Tree%20Loungers.md)
 - [Apple AirTag](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Apple%20AirTag.md)
 - [Belkin Switch 2 Case](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Belkin%20Switch%202%20Case.md)
