@@ -6,6 +6,8 @@
 - [Apple AirTag](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Apple%20AirTag.md)
 - [Belkin Switch 2 Case](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Belkin%20Switch%202%20Case.md)
 - [Cable Matters 10ft Snagless Ethernet Cable](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Cable%20Matters%2010ft%20Snagless%20Ethernet%20Cable.md)
+- [Funko Pop! Anya Forger with Penguin](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Funko%20Pop!%20Anya%20Forger%20with%20Penguin.md)
+- [Funko Pop! Yor Forger (Red Sweater Dress)](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Funko%20Pop!%20Yor%20Forger%20(Red%20Sweater%20Dress).md)
 - [LEGO 2 Fast 2 Furious Nissan Skyline GT-R (R34)](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%202%20Fast%202%20Furious%20Nissan%20Skyline%20GT-R%20(R34).md)
 - [LEGO Crafting Table](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Crafting%20Table.md)
 - [LEGO Eve & Wall-E (Brickheads)](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Eve%20%26%20Wall-E%20(Brickheads).md)
