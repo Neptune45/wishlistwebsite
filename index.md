@@ -16,7 +16,7 @@
 - [LEGO Toothless](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Toothless.md)
 - [LTT Screwdriver](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LTT%20Screwdriver.md)
 - [ONO Signets](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/ONO%20Signets.md)
-- [SCUF Reflex](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/SCUF%20Reflex.md)
+- [SCUF Instinct Pro](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/SCUF%20Instinct%20Pro.md)
 - [Smiski](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Smiski.md)
 - [Switch 2 Joy-Cons](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Switch%202%20Joy-Cons.md)
 - [Switch 2 Pro Controller](https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Switch%202%20Pro%20Controller.md)

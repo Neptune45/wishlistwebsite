@@ -11,4 +11,6 @@ status: Want
 ---
 # Additional Notes :
 
-Only if a good colorway comes out
+Size - US Men's 11
+
+Only want if a good, unique colorway comes out
