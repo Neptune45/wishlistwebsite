@@ -1,5 +1,5 @@
 ---
-name: SCUF Reflex
+name: SCUF Instinct Pro
 type: Video Games 🎮
 price: 250
 status: Want
@@ -7,6 +7,7 @@ status: Want
 # Where To Buy :
 
 [SCUF (Scump's Sweatbannin')](https://scufgaming.com/scump)
+
 [SCUF (OpTic Gaming's Tagged For Greatness)](https://scufgaming.com/optic-gaming)
 
 ---
