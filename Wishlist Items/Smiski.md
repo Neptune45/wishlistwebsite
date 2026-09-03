@@ -11,4 +11,4 @@ status: Want
 ---
 # Additional Notes :
 
-Mostly talking about the main series Smiskis figures. Not the auxiliary ones such as the hippers and other accessories
+Mostly talking about the Smiskis figures 'series' (i.e. Construction, @ Work, Birthday, and others that are $12.25 each). Not the auxiliary ones such as the hippers and other accessories
