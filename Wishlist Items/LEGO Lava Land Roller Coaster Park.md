@@ -3,6 +3,8 @@ name: LEGO Lava Land Roller Coaster Park
 type: Buildable 🧱
 price: 100
 status: Want
+priority:
+image: images/lego-lava-land-roller-coaster-park.jpg
 ---
 # Where To Buy :
 

@@ -3,6 +3,8 @@ name: Logitech Pro X2 Superstrike Mouse
 type: Technology 💻
 price: 180
 status: Want
+priority:
+image: images/logitech-pro-x2-superstrike-mouse.jpg
 ---
 # Where To Buy :
 

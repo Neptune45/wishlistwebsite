@@ -3,6 +3,7 @@ name: MOC LEGO Golurk
 type: Buildable 🧱
 price: 59
 status: Want
+priority:
 ---
 # Where To Buy :
 
@@ -11,4 +12,4 @@ status: Want
 ---
 # Additional Notes :
 
-**WARNING:** This is NOT official LEGO
+**WARNING:** This is NOT official LEGO, but still want regardless

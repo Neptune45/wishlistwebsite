@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Wishlist</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #E4EAF0;
+    --hole: #CBD5DF;
+    --card: #FFFFFF;
+    --photo: #FFFFFF;
+    --ink: #1B2430;
+    --muted: #5A6777;
+    --line: #CDD6E0;
+    --tag: #FFD23F;
+    --tag-ink: #1B2430;
+    --chip: #FFFFFF;
+    --chip-on: #1B2430;
+    --chip-on-ink: #FFFFFF;
+    --focus: #2F6FDB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #19212A;
+      --hole: #252F3A;
+      --card: #222C37;
+      --photo: #F2F4F7;
+      --ink: #E8EDF2;
+      --muted: #9CA9B7;
+      --line: #313D4A;
+      --chip: #222C37;
+      --chip-on: #FFD23F;
+      --chip-on-ink: #1B2430;
+      --focus: #7FA8F0;
+    }
+  }
+  * { box-sizing: border-box; }
+  html {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  body {
+    margin: 0;
+    font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+    /* pegboard */
+    background-image: radial-gradient(var(--hole) 2px, transparent 2.5px);
+    background-size: 26px 26px;
+    line-height: 1.4;
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px));
+  }
+  header { margin-bottom: 20px; }
+  h1 {
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    font-weight: 800;
+    font-variation-settings: "opsz" 96;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0 0 8px;
+  }
+  .summary { margin: 0; color: var(--muted); font-size: 1.05rem; }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 2px;
+    scrollbar-width: none;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--chip);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--chip-on);
+    color: var(--chip-on-ink);
+    border-color: var(--chip-on);
+    font-weight: 650;
+  }
+  .sort {
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--chip);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 7px 10px;
+  }
+  .chip:focus-visible, .sort:focus-visible, .card:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 18px;
+  }
+  .group + .group { margin-top: 40px; }
+  .group[hidden] { display: none; }
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 1.6rem;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+  .count { font-size: 0.95rem; font-weight: 400; color: var(--muted); }
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .card:hover { border-color: var(--muted); }
+  .card[hidden] { display: none; }
+  .photo {
+    aspect-ratio: 1;
+    background: var(--photo);
+    border-radius: 11px 11px 0 0;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 12px;
+  }
+  .placeholder { font-size: 3.2rem; }
+  /* the price tag: the one loud thing on the page */
+  .tag {
+    position: absolute;
+    top: 12px;
+    right: -7px;
+    background: var(--tag);
+    color: var(--tag-ink);
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 5px 12px 5px 22px;
+    transform: rotate(5deg);
+    clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%);
+  }
+  .tag::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    margin-top: -3px;
+    border-radius: 50%;
+    background: var(--photo);
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px 14px;
+    border-top: 1px solid var(--line);
+  }
+  .name {
+    font-weight: 650;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .type { color: var(--muted); font-size: 0.88rem; }
+  .status {
+    align-self: flex-start;
+    font-size: 0.8rem;
+    font-weight: 650;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1px 6px;
+  }
+  @media (min-width: 700px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>My Wishlist</h1>
+      <p class="summary" id="summary">39 items</p>
+    </header>
+    <div class="controls">
+      <div class="chips" role="group" aria-label="Filter by type">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="Buildable" aria-pressed="false">🧱 Buildable</button>
+        <button class="chip" type="button" data-filter="Collectable" aria-pressed="false">🎊 Collectable</button>
+        <button class="chip" type="button" data-filter="Misc" aria-pressed="false">❓ Misc</button>
+        <button class="chip" type="button" data-filter="Technology" aria-pressed="false">💻 Technology</button>
+        <button class="chip" type="button" data-filter="Tools" aria-pressed="false">🔨 Tools</button>
+        <button class="chip" type="button" data-filter="Video Games" aria-pressed="false">🎮 Video Games</button>
+      </div>
+      <select class="sort" id="sort" aria-label="Sort items">
+        <option value="name">Name A to Z</option>
+        <option value="low">Price, low to high</option>
+        <option value="high">Price, high to low</option>
+      </select>
+    </div>
+    <main>
+    <section class="group">
+      <div class="grid">
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/AULA%20F65%20Keyboard.md" data-type="Technology" data-name="aula f65 keyboard" data-price="66.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">💻</span></div>
+        <span class="tag">$66</span>
+        <div class="info">
+          <span class="name">AULA F65 Keyboard</span>
+          <span class="type">💻 Technology</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Apple%20AirTag.md" data-type="Technology" data-name="apple airtag" data-price="29.0">
+        <div class="photo"><img src="Wishlist%20Items/images/apple-airtag.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$29</span>
+        <div class="info">
+          <span class="name">Apple AirTag</span>
+          <span class="type">💻 Technology</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Celadon%20Game%20Corner%20Pokemon%20Puzzle.md" data-type="Buildable" data-name="celadon game corner pokemon puzzle" data-price="17.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🧱</span></div>
+        <span class="tag">$17</span>
+        <div class="info">
+          <span class="name">Celadon Game Corner Pokemon Puzzle</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Dillards%20Mens%20Holiday%20Fragrance%20Sampler.md" data-type="Misc" data-name="dillards mens holiday fragrance sampler" data-price="45.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">❓</span></div>
+        <span class="tag">$45</span>
+        <div class="info">
+          <span class="name">Dillards Mens Holiday Fragrance Sampler</span>
+          <span class="type">❓ Misc</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Hoenn%20Explore%20Pokemon%20Puzzle.md" data-type="Buildable" data-name="hoenn explore pokemon puzzle" data-price="20.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🧱</span></div>
+        <span class="tag">$20</span>
+        <div class="info">
+          <span class="name">Hoenn Explore Pokemon Puzzle</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Keychron%20Silicone%20Wrist%20Rest.md" data-type="Technology" data-name="keychron silicone wrist rest" data-price="15.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">💻</span></div>
+        <span class="tag">$15</span>
+        <div class="info">
+          <span class="name">Keychron Silicone Wrist Rest</span>
+          <span class="type">💻 Technology</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Arcade%20Pinball%20Machine.md" data-type="Buildable" data-name="lego arcade pinball machine" data-price="230.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-arcade-pinball-machine.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$230</span>
+        <div class="info">
+          <span class="name">LEGO Arcade Pinball Machine</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Disney%20Pixar%20Luxo%20Jr..md" data-type="Buildable" data-name="lego disney pixar luxo jr." data-price="70.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-disney-pixar-luxo-jr.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$70</span>
+        <div class="info">
+          <span class="name">LEGO Disney Pixar Luxo Jr.</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Ghast%20Station.md" data-type="Buildable" data-name="lego ghast station" data-price="110.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-ghast-station.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$110</span>
+        <div class="info">
+          <span class="name">LEGO Ghast Station</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Lava%20Land%20Roller%20Coaster%20Park.md" data-type="Buildable" data-name="lego lava land roller coaster park" data-price="100.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-lava-land-roller-coaster-park.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$100</span>
+        <div class="info">
+          <span class="name">LEGO Lava Land Roller Coaster Park</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Minecraft%20Mini%20Biomes.md" data-type="Buildable" data-name="lego minecraft mini biomes" data-price="60.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-minecraft-mini-biomes.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$60</span>
+        <div class="info">
+          <span class="name">LEGO Minecraft Mini Biomes</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Minifigure%20Vending%20Machine.md" data-type="Buildable" data-name="lego minifigure vending machine" data-price="180.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-minifigure-vending-machine.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$180</span>
+        <div class="info">
+          <span class="name">LEGO Minifigure Vending Machine</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Munchlax.md" data-type="Buildable" data-name="lego munchlax" data-price="70.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-munchlax.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$70</span>
+        <div class="info">
+          <span class="name">LEGO Munchlax</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Rayquaza.md" data-type="Buildable" data-name="lego rayquaza" data-price="130.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-rayquaza.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$130</span>
+        <div class="info">
+          <span class="name">LEGO Rayquaza</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Spider-Man%20vs.%20Doc%20Ock%20Subway%20Train%20Scene.md" data-type="Buildable" data-name="lego spider-man vs. doc ock subway train scene" data-price="55.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-spider-man-vs-doc-ock-subway-train-scene.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$55</span>
+        <div class="info">
+          <span class="name">LEGO Spider-Man vs. Doc Ock Subway Train Scene</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Spider-Man%20vs.%20Mysterio%20The%20Daily%20Bugle.md" data-type="Buildable" data-name="lego spider-man vs. mysterio the daily bugle" data-price="100.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-spider-man-vs-mysterio-the-daily-bugle.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$100</span>
+        <div class="info">
+          <span class="name">LEGO Spider-Man vs. Mysterio The Daily Bugle</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Spider-Man%20vs.%20Oscorp.md" data-type="Buildable" data-name="lego spider-man vs. oscorp" data-price="140.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-spider-man-vs-oscorp.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$140</span>
+        <div class="info">
+          <span class="name">LEGO Spider-Man vs. Oscorp</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20SpongeBob%20SquarePants%20Bikini%20Bottom.md" data-type="Buildable" data-name="lego spongebob squarepants bikini bottom" data-price="220.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-spongebob-squarepants-bikini-bottom.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$220</span>
+        <div class="info">
+          <span class="name">LEGO SpongeBob SquarePants Bikini Bottom</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Sulley%20Mike%20and%20Boo%20Figures.md" data-type="Buildable" data-name="lego sulley mike and boo figures" data-price="25.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-sulley-mike-and-boo-figures.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$25</span>
+        <div class="info">
+          <span class="name">LEGO Sulley Mike and Boo Figures</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20The%20City%20Tower.md" data-type="Buildable" data-name="lego the city tower" data-price="210.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-the-city-tower.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$210</span>
+        <div class="info">
+          <span class="name">LEGO The City Tower</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20The%20Ender%20Dragon.md" data-type="Buildable" data-name="lego the ender dragon" data-price="70.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-the-ender-dragon.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$70</span>
+        <div class="info">
+          <span class="name">LEGO The Ender Dragon</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LEGO%20Up%20House.md" data-type="Buildable" data-name="lego up house" data-price="60.0">
+        <div class="photo"><img src="Wishlist%20Items/images/lego-up-house.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$60</span>
+        <div class="info">
+          <span class="name">LEGO Up House</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/LTT%20Screwdriver.md" data-type="Tools" data-name="ltt screwdriver" data-price="70.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🔨</span></div>
+        <span class="tag">$70</span>
+        <div class="info">
+          <span class="name">LTT Screwdriver</span>
+          <span class="type">🔨 Tools</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Logitech%20Pro%20X2%20Superstrike%20Mouse.md" data-type="Technology" data-name="logitech pro x2 superstrike mouse" data-price="180.0">
+        <div class="photo"><img src="Wishlist%20Items/images/logitech-pro-x2-superstrike-mouse.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$180</span>
+        <div class="info">
+          <span class="name">Logitech Pro X2 Superstrike Mouse</span>
+          <span class="type">💻 Technology</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/MOC%20LEGO%20Flygon.md" data-type="Buildable" data-name="lego moc flygon" data-price="56.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🧱</span></div>
+        <span class="tag">$56</span>
+        <div class="info">
+          <span class="name">LEGO MOC Flygon</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/MOC%20LEGO%20Golurk.md" data-type="Buildable" data-name="moc lego golurk" data-price="59.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🧱</span></div>
+        <span class="tag">$59</span>
+        <div class="info">
+          <span class="name">MOC LEGO Golurk</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/MOC%20LEGO%20Hydreigon%20Bundle.md" data-type="Buildable" data-name="moc lego hydreigon bundle" data-price="110.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🧱</span></div>
+        <span class="tag">$110</span>
+        <div class="info">
+          <span class="name">MOC LEGO Hydreigon Bundle</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/MOC%20LEGO%20Volcarona%20and%20Larvesta.md" data-type="Buildable" data-name="moc lego volcarona and larvesta" data-price="77.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🧱</span></div>
+        <span class="tag">$77</span>
+        <div class="info">
+          <span class="name">MOC LEGO Volcarona and Larvesta</span>
+          <span class="type">🧱 Buildable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Pokemon%20Card%20Binder%20-%20Top%20Loader%20Binder.md" data-type="Collectable" data-name="pokemon card binder - top loader binder" data-price="60.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🎊</span></div>
+        <span class="tag">$60</span>
+        <div class="info">
+          <span class="name">Pokemon Card Binder - Top Loader Binder</span>
+          <span class="type">🎊 Collectable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Pokemon%20TCG%20Gem%20Pack%206%20Box.md" data-type="Collectable" data-name="pokemon tcg gem pack 6 box" data-price="30.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🎊</span></div>
+        <span class="tag">$30</span>
+        <div class="info">
+          <span class="name">Pokemon TCG Gem Pack 6 Box</span>
+          <span class="type">🎊 Collectable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Pokemon%20TCG%20Gem%20Pack%207%20Box.md" data-type="Collectable" data-name="pokemon tcg gem pack 7 box" data-price="43.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🎊</span></div>
+        <span class="tag">$43</span>
+        <div class="info">
+          <span class="name">Pokemon TCG Gem Pack 7 Box</span>
+          <span class="type">🎊 Collectable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/SCUF%20Universal%20Controller%20Case%20%28Optic%29.md" data-type="Video Games" data-name="scuf universal controller case (optic)" data-price="25.0">
+        <div class="photo"><img src="Wishlist%20Items/images/scuf-universal-controller-case-optic.png" alt="" loading="lazy"></div>
+        <span class="tag">$25</span>
+        <div class="info">
+          <span class="name">SCUF Universal Controller Case (Optic)</span>
+          <span class="type">🎮 Video Games</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Sephora%20Cologne%20Sampler.md" data-type="Misc" data-name="sephora cologne sampler" data-price="98.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">❓</span></div>
+        <span class="tag">$98</span>
+        <div class="info">
+          <span class="name">Sephora Cologne Sampler</span>
+          <span class="type">❓ Misc</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Smiski.md" data-type="Collectable" data-name="smiski" data-price="13.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">🎊</span></div>
+        <span class="tag">$13</span>
+        <div class="info">
+          <span class="name">Smiski</span>
+          <span class="type">🎊 Collectable</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Splatoon%20Raiders.md" data-type="Video Games" data-name="splatoon raiders" data-price="60.0">
+        <div class="photo"><img src="Wishlist%20Items/images/splatoon-raiders.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$60</span>
+        <div class="info">
+          <span class="name">Splatoon Raiders</span>
+          <span class="type">🎮 Video Games</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Switch%202%20Joy-Cons.md" data-type="Video Games" data-name="switch 2 joy-cons" data-price="100.0">
+        <div class="photo"><img src="Wishlist%20Items/images/switch-2-joy-cons.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$100</span>
+        <div class="info">
+          <span class="name">Switch 2 Joy-Cons</span>
+          <span class="type">🎮 Video Games</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/The%20Legend%20of%20Zelda%20Link%27s%20Awakening.md" data-type="Video Games" data-name="the legend of zelda link&#x27;s awakening" data-price="60.0">
+        <div class="photo"><img src="Wishlist%20Items/images/the-legend-of-zelda-link-s-awakening.jpg" alt="" loading="lazy"></div>
+        <span class="tag">$60</span>
+        <div class="info">
+          <span class="name">The Legend of Zelda Link&#x27;s Awakening</span>
+          <span class="type">🎮 Video Games</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Valentino%20Uomo%20Born%20In%20Roma%20Intense%20Cologne.md" data-type="Misc" data-name="valentino uomo born in roma intense cologne" data-price="130.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">❓</span></div>
+        <span class="tag">$130</span>
+        <div class="info">
+          <span class="name">Valentino Uomo Born In Roma Intense Cologne</span>
+          <span class="type">❓ Misc</span>
+          
+        </div>
+      </a>
+      <a class="card" href="https://github.com/Neptune45/wishlistwebsite/blob/main/Wishlist%20Items/Wuque%20Studios%20Silent%20Tactile%20Switches.md" data-type="Technology" data-name="wuque studios silent tactile switches" data-price="30.0">
+        <div class="photo"><span class="placeholder" aria-hidden="true">💻</span></div>
+        <span class="tag">$30</span>
+        <div class="info">
+          <span class="name">Wuque Studios Silent Tactile Switches</span>
+          <span class="type">💻 Technology</span>
+          
+        </div>
+      </a>
+      </div>
+    </section>
+    </main>
+  </div>
+<script>
+  const grids = document.querySelectorAll(".grid");
+  const groups = document.querySelectorAll(".group");
+  const cards = Array.from(document.querySelectorAll(".card"));
+  const chips = document.querySelectorAll(".chip");
+  const summary = document.getElementById("summary");
+  const money = n => "$" + n.toLocaleString("en-US", {maximumFractionDigits: 2});
+
+  function updateSummary() {
+    const shown = cards.filter(c => !c.hidden);
+    const total = shown.reduce((sum, c) => sum + (parseFloat(c.dataset.price) || 0), 0);
+    summary.textContent = shown.length + (shown.length === 1 ? " item, " : " items, ") + money(total) + " in total";
+    groups.forEach(group => {
+      const visible = group.querySelectorAll(".card:not([hidden])").length;
+      group.hidden = visible === 0;
+      const count = group.querySelector(".count");
+      if (count) count.textContent = visible + (visible === 1 ? " item" : " items");
+    });
+  }
+
+  chips.forEach(chip => chip.addEventListener("click", () => {
+    chips.forEach(c => c.setAttribute("aria-pressed", String(c === chip)));
+    const filter = chip.dataset.filter;
+    cards.forEach(card => { card.hidden = filter !== "all" && card.dataset.type !== filter; });
+    updateSummary();
+  }));
+
+  document.getElementById("sort").addEventListener("change", e => {
+    const price = c => parseFloat(c.dataset.price);
+    const byName = (a, b) => a.dataset.name.localeCompare(b.dataset.name);
+    const compare = (a, b) => {
+      if (e.target.value === "name") return byName(a, b);
+      const pa = price(a), pb = price(b);
+      if (isNaN(pa) !== isNaN(pb)) return isNaN(pa) ? 1 : -1;
+      return (e.target.value === "low" ? pa - pb : pb - pa) || byName(a, b);
+    };
+    // sort inside each priority section; the sections keep their order
+    grids.forEach(grid => [...grid.children].sort(compare).forEach(c => grid.appendChild(c)));
+  });
+
+  updateSummary();
+</script>
+</body>
+</html>

@@ -3,6 +3,8 @@ name: LEGO The City Tower
 type: Buildable 🧱
 price: 210
 status: Want
+priority:
+image: images/lego-the-city-tower.jpg
 ---
 # Where To Buy :
 

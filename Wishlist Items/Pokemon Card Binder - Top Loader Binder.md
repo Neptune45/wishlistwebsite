@@ -3,6 +3,7 @@ name: Pokemon Card Binder - Top Loader Binder
 type: Collectable 🎊
 price: 60
 status: Want
+priority:
 ---
 # Where To Buy :
 

@@ -3,6 +3,7 @@ name: Celadon Game Corner Pokemon Puzzle
 type: Buildable 🧱
 price: 17
 status: Want
+priority:
 ---
 # Where To Buy :
 

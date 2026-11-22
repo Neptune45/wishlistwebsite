@@ -3,6 +3,8 @@ name: LEGO Up House
 type: Buildable 🧱
 price: 60
 status: Want
+priority:
+image: images/lego-up-house.jpg
 ---
 # Where To Buy :
 

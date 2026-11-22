@@ -3,6 +3,7 @@ name: Dillards Mens Holiday Fragrance Sampler
 type: Misc ❓
 price: 45
 status: Want
+priority:
 ---
 # Where To Buy :
 

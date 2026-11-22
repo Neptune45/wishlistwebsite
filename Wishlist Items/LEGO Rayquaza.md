@@ -3,6 +3,8 @@ name: LEGO Rayquaza
 type: Buildable 🧱
 price: 130
 status: Want
+priority:
+image: images/lego-rayquaza.jpg
 ---
 # Where To Buy :
 

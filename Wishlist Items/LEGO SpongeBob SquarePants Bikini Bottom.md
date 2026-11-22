@@ -3,6 +3,8 @@ name: LEGO SpongeBob SquarePants Bikini Bottom
 type: Buildable 🧱
 price: 220
 status: Want
+priority:
+image: images/lego-spongebob-squarepants-bikini-bottom.jpg
 ---
 # Where To Buy :
 

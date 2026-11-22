@@ -3,6 +3,8 @@ name: LEGO Sulley Mike and Boo Figures
 type: Buildable 🧱
 price: 25
 status: Want
+priority:
+image: images/lego-sulley-mike-and-boo-figures.jpg
 ---
 # Where To Buy :
 

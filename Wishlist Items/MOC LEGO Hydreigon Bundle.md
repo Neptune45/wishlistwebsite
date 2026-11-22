@@ -3,6 +3,7 @@ name: MOC LEGO Hydreigon Bundle
 type: Buildable 🧱
 price: 110
 status: Want
+priority:
 ---
 # Where To Buy :
 
@@ -11,6 +12,6 @@ status: Want
 ---
 # Additional Notes :
 
-**WARNING:** This is NOT official LEGO
+**WARNING:** This is NOT official LEGO, but still want regardless
 
 Additional parts of bundle also available through same link if desired.

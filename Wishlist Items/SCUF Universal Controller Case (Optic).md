@@ -3,6 +3,8 @@ name: SCUF Universal Controller Case (Optic)
 type: Video Games 🎮
 price: 25
 status: Want
+priority:
+image: images/scuf-universal-controller-case-optic.png
 ---
 # Where To Buy :
 

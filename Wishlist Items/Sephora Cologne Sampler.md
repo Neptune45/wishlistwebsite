@@ -3,10 +3,11 @@ name: Sephora Cologne Sampler
 type: Misc ❓
 price: 98
 status: Want
+priority:
 ---
 # Where To Buy :
 
-[Sephora](https://www.sephora.com/product/cologne-sampler-set-with-redeemable-voucher-P518305?skuId=2908994&icid2=products%20grid:p518305:product)
+[Sephora](https://www.sephora.com/product/holiday-mens-cologne-sampler-gift-set-w-redeemable-voucher-P526132?skuId=3027828&icid2=products%20grid:p526132:product)
 
 
 ---

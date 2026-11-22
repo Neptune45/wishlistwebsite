@@ -3,6 +3,8 @@ name: Splatoon Raiders
 type: Video Games 🎮
 price: 60
 status: Want
+priority:
+image: images/splatoon-raiders.jpg
 ---
 # Where To Buy :
 

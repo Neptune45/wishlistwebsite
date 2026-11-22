@@ -3,6 +3,7 @@ name: Hoenn Explore Pokemon Puzzle
 type: Buildable 🧱
 price: 20
 status: Want
+priority:
 ---
 # Where To Buy :
 

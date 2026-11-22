@@ -3,6 +3,8 @@ name: LEGO Minifigure Vending Machine
 type: Buildable 🧱
 price: 180
 status: Want
+priority:
+image: images/lego-minifigure-vending-machine.jpg
 ---
 # Where To Buy :
 

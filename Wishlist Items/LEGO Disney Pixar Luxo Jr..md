@@ -3,6 +3,8 @@ name: LEGO Disney Pixar Luxo Jr.
 type: Buildable 🧱
 price: 70
 status: Want
+priority:
+image: images/lego-disney-pixar-luxo-jr.jpg
 ---
 # Where To Buy :
 

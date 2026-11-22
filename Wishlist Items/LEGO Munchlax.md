@@ -3,6 +3,8 @@ name: LEGO Munchlax
 type: Buildable 🧱
 price: 70
 status: Want
+priority:
+image: images/lego-munchlax.jpg
 ---
 # Where To Buy :
 

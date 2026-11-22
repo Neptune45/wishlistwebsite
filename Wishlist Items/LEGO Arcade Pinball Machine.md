@@ -3,6 +3,8 @@ name: LEGO Arcade Pinball Machine
 type: Buildable 🧱
 price: 230
 status: Want
+priority:
+image: images/lego-arcade-pinball-machine.jpg
 ---
 # Where To Buy :
 

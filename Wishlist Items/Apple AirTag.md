@@ -3,6 +3,8 @@ name: Apple AirTag
 type: Technology 💻
 price: 29
 status: Want
+priority:
+image: images/apple-airtag.jpg
 ---
 # Where To Buy :
 

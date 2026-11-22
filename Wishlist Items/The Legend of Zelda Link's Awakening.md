@@ -3,6 +3,8 @@ name: The Legend of Zelda Link's Awakening
 type: Video Games 🎮
 price: 60
 status: Want
+priority:
+image: images/the-legend-of-zelda-link-s-awakening.jpg
 ---
 # Where To Buy :
 

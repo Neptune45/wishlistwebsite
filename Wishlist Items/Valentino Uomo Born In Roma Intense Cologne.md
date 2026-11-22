@@ -3,6 +3,7 @@ name: Valentino Uomo Born In Roma Intense Cologne
 type: Misc ❓
 price: 130
 status: Want
+priority:
 ---
 # Where To Buy :
 

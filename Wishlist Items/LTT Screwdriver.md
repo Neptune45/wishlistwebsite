@@ -3,6 +3,7 @@ name: LTT Screwdriver
 type: Tools 🔨
 price: 70
 status: Want
+priority:
 ---
 # Where To Buy :
 

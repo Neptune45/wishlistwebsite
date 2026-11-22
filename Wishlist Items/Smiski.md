@@ -3,6 +3,7 @@ name: Smiski
 type: Collectable 🎊
 price: 13
 status: Want
+priority:
 ---
 # Where To Buy :
 

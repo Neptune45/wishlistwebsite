@@ -3,6 +3,8 @@ name: Switch 2 Joy-Cons
 type: Video Games 🎮
 price: 100
 status: Want
+priority:
+image: images/switch-2-joy-cons.jpg
 ---
 # Where To Buy :
 
