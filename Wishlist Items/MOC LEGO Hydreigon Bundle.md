@@ -4,6 +4,7 @@ type: Buildable 🧱
 price: 110
 status: Want
 priority:
+image: images/moc-lego-hydreigon-bundle.jpg
 ---
 # Where To Buy :
 

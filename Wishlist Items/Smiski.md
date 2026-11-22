@@ -4,6 +4,7 @@ type: Collectable 🎊
 price: 13
 status: Want
 priority:
+image: images/smiski.jpg
 ---
 # Where To Buy :
 

@@ -4,6 +4,7 @@ type: Misc ❓
 price: 130
 status: Want
 priority:
+image: images/valentino-uomo-born-in-roma-intense-cologne.jpg
 ---
 # Where To Buy :
 

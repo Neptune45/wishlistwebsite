@@ -4,6 +4,7 @@ type: Technology 💻
 price: 30
 status: Want
 priority: "0"
+image: images/wuque-studios-silent-tactile-switches.jpg
 ---
 # Where To Buy :
 

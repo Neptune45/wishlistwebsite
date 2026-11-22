@@ -4,6 +4,7 @@ type: Buildable 🧱
 price: 20
 status: Want
 priority:
+image: images/hoenn-explore-pokemon-puzzle.jpg
 ---
 # Where To Buy :
 

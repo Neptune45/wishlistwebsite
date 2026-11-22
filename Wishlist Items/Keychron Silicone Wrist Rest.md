@@ -4,6 +4,7 @@ type: Technology 💻
 price: 15
 status: Want
 priority: "0"
+image: images/keychron-silicone-wrist-rest.jpg
 ---
 # Where To Buy :
 

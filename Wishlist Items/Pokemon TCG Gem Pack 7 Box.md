@@ -4,6 +4,7 @@ type: Collectable 🎊
 price: 43
 status: Want
 priority: "1"
+image: images/pokemon-tcg-gem-pack-7-box.jpg
 ---
 # Where To Buy :
 

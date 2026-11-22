@@ -4,6 +4,7 @@ type: Technology 💻
 price: 66
 status: Want
 priority: "0"
+image: images/aula-f65-keyboard.png
 ---
 # Where To Buy :
 

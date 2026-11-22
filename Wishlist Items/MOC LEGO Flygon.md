@@ -4,6 +4,7 @@ type: Buildable 🧱
 price: 56
 status: Want
 priority:
+image: images/lego-moc-flygon.jpg
 ---
 # Where To Buy :
 

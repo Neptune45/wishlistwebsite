@@ -4,6 +4,7 @@ type: Collectable 🎊
 price: 60
 status: Want
 priority:
+image: images/pokemon-card-binder-top-loader-binder.jpg
 ---
 # Where To Buy :
 

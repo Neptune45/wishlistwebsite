@@ -4,6 +4,7 @@ type: Buildable 🧱
 price: 77
 status: Want
 priority:
+image: images/moc-lego-volcarona-and-larvesta.jpg
 ---
 # Where To Buy :
 

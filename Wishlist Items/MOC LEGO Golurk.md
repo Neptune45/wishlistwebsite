@@ -4,6 +4,7 @@ type: Buildable 🧱
 price: 59
 status: Want
 priority:
+image: images/moc-lego-golurk.jpg
 ---
 # Where To Buy :
 

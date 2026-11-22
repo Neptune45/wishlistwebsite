@@ -4,6 +4,7 @@ type: Buildable 🧱
 price: 17
 status: Want
 priority:
+image: images/celadon-game-corner-pokemon-puzzle.jpg
 ---
 # Where To Buy :
 
